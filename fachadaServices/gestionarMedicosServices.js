@@ -3,9 +3,9 @@ class GestionarMedicos {
     this.medicoRepo = medicoRepo;
   }
 
-  registrarMedico(nombres, apellidos,especialidad,horarioAtencion,aniosExperiencia,bibliografia) {
+  registrarMedico(nombres, apellidos, especialidad, horarioInicio, horarioFin, aniosExperiencia, bibliografia) {
     const id = this.medicoRepo.siguienteId();
-    const medico = new Medico(id, nombres, apellidos,especialidad,horarioAtencion,aniosExperiencia,bibliografia);
+    const medico = new Medico(id, nombres, apellidos, especialidad, horarioInicio, horarioFin, aniosExperiencia, bibliografia);
     this.medicoRepo.agregar(medico);
     return medico;
   }

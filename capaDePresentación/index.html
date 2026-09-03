@@ -9,49 +9,77 @@
   <div id="notificaiones" class="notificaciones-contenedor"></div>
 
   <header class="header-academico">
-    <h1>Sistema de Agendamiento de Citas xxx</h1>
+    <h1>Sistema de Agendamiento de Citas Medicas</h1>
     <p>Universidad del Cauca</p>
     <p>Laboratorio 3 — JavaSript - Manejo del DOM - Arquitectura en Capas</p>
   </header>
 
   <h2>Registrar Medico</h2>
   <form id="formMedico">
-    <input type="text" id="nombresMedico" placeholder="Nombres" required>
-    <input type="text" id="apellidosMedico" placeholder="Apellidos" required>
-    <input type="text" id="especialidadMedico" placeholder="Especialidad" required>
-    <input type="text" id="horarioMedico" placeholder="Horario" required>
-    <input type="time" id="horarioInicioMedico" placeholder="Hora de inicio" required>
-    <input type="time" id="horarioFinMedico" placeholder="Hora de fin" required>
-    <input type="text" id="aniosExperienciaMedico" placeholder="Años de experiencia" required>
-    <input type="text" id="bibliografiaMedico" placeholder="Bibliografia" required>
-    <button type="submit" id="btnAgregarMedico" disabled>Agregar Medico</button>
+    <label for="nombresMedico">Nombres</label>
+    <input type="text" id="nombresMedico" placeholder="Nombres" >
+    <label class="error" id="errorNombresMedico"></label><br>
+
+    <label for="apellidosMedico">Apellidos</label>
+    <input type="text" id="apellidosMedico" placeholder="Apellidos">
+    <label class="error" id="errorApellidosMedico"></label><br>
+
+    <label for="especialidadMedico">Especialidad</label>
+    <input type="text" id="especialidadMedico" placeholder="Especialidad" >
+    <label class="error" id="errorEspecialidad"></label><br>
+
+    <label for="horarioFinMedico">Hora inicio</label>
+    <input type="time" id="horarioInicioMedico" placeholder="Hora de inicio" >
+    <label class="error" id="errorHorarioInicio"></label><br>
+
+    <label for="horarioFinMedico">Hora fin</label>
+    <input type="time" id="horarioFinMedico" placeholder="Hora de fin" >
+    <label class="error" id="errorHorarioFin"></label><br>
+
+    <label for="aniosExperienciaMedico">años de experiencia</label>
+    <input type="text" id="aniosExperienciaMedico" placeholder="Años de experiencia" >
+   
+
+    <label for="bibliografiaMedico">Bibliografia</label>
+    <input type="text" id="bibliografiaMedico" placeholder="Bibliografia" >
+
+    <button type="submit" id="btnAgregarMedico">Agregar Medico</button>
   </form>
 
   <h2>Registrar Paciente</h2>
   <form id="formPaciente">
-    <input type="text" id="nombresPaciente" placeholder="Nombres" required>
-    <input type="text" id="apellidosPaciente" placeholder="Apellidos" required>
-    <button type="submit" id="btnAgregarPaciente" disabled>Agregar Paciente</button>
+    <label for="nombresPaciente">Nombres</label>
+    <input type="text" id="nombresPaciente" placeholder="Nombres" >
+    <label class="error" id="errorNombresPaciente"></label><br>
+
+    <label for="apellidosPaciente">Apellidos</label>
+    <input type="text" id="apellidosPaciente" placeholder="Apellidos" >
+    <label class="error" id="errorApellidosPaciente"></label><br>
+
+    <button type="submit" id="btnAgregarPaciente">Agregar Paciente</button>
   </form>
 
   <h2>Registrar citas medicas</h2>
   <form id="formCitas">
     
     <label for="fecha">Fecha</label>
-    <input type="date" id="fecha" required>
+    <input type="date" id="fecha" >
 
     <label for="horaInicio">Hora Inicio</label>
-    <input type="time" id="horaInicio" required>
+    <input type="time" id="horaInicio" >
 
     <label for="horaFin">Hora Fin</label>
-    <input type="time" id="horaFin" required>
+    <input type="time" id="horaFin" >
 
     <label for="medicoSelect" >Medico</label>
-    <select id="medicoSelect" required></select>
+    <select id="medicoSelect" ></select>
+    <label class="error" id="errorMedicoSelect"></label><br>
 
     <label for="pacienteSelect">Paciente</label>
-    <select id="pacienteSelect" required></select>
-    <button type="submit" id="btnAgregarCita" disabled>Agregar Cita</button>
+    <select id="pacienteSelect" ></select>
+    <label class="error" id="errorPacienteSelect"></label><br>
+
+    <button type="submit" id="btnAgregarCita">Agregar Cita</button>
   </form>
 
   <h2>Citas Registradas</h2>
@@ -95,6 +123,7 @@
   <script src="logicaPaciente.js"></script>
   <script src="logicaCita.js"></script>
 
+  <script src="validaciones.js"></script>
 
 </body>
 </html>

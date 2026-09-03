@@ -10,6 +10,7 @@ h2 {
     padding-bottom: 5px;
 }
 
+
 /* Encabezado académico */
 .header-academico {
     background-color: #007bff;
@@ -91,6 +92,9 @@ button:hover {
 button:disabled {
     background-color: #e2dddd;
     cursor: not-allowed;
+}
+.error{
+    color: #dc3545;
 }
 
 /* Estilos para la tabla */

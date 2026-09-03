@@ -4,11 +4,13 @@ const btnAgregarMedico = document.getElementById("btnAgregarMedico");
 
 // habilita/deshabilita el botón según la validez del formulario
 formMedico.addEventListener("input", () => {
-  btnAgregarMedico.disabled = !formMedico.checkValidity();
 });
 
 formMedico.addEventListener("submit", (e) => {
   e.preventDefault();
+  if(!validarFormularioMedico()){
+    return;
+  }
   const nombres = document.getElementById("nombresMedico").value;
   const apellidos = document.getElementById("apellidosMedico").value;
   const especialidad = document.getElementById("especialidadMedico").value;
@@ -35,7 +37,6 @@ formMedico.addEventListener("submit", (e) => {
   medicoSelect.appendChild(option);
 
   formMedico.reset();
-  btnAgregarMedico.disabled = true;
 
   mostrarNotificacion(`Médico ${medico.nombres} ${medico.apellidos} registrado con éxito`);
 });
