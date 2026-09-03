@@ -1,4 +1,3 @@
-
 function validarCampoObligatorio(campo, errorElement, mensaje) {
     if (campo.value.trim() === '') {
         errorElement.textContent = mensaje;
@@ -129,31 +128,29 @@ function validarFormularioCita(){
 
 }
 
-// Función principal que valida todo el formulario
+const camposMedico = [
+    ['nombresMedico', 'errorNombresMedico', 'El nombre debe tener entre 1 y 20 caracteres.'],
+    ['apellidosMedico', 'errorApellidosMedico', 'El apellido debe tener entre 1 y 20 caracteres.'],
+    ['especialidadMedico', 'errorEspecialidad', 'La especialidad debe tener entre 1 y 20 caracteres.']
+];
+const camposPaciente = [
+    ['nombresPaciente', 'errorNombresPaciente', 'El nombre debe tener entre 1 y 20 caracteres.'],
+    ['apellidosPaciente', 'errorApellidosPaciente', 'El apellido debe tener entre 1 y 20 caracteres.']
+];
+
+function validarCampoDesdeId(campoId, errorId, mensaje) {
+    const campo = document.getElementById(campoId);
+    const errorElement = document.getElementById(errorId);
+    validarCampoObligatorio(campo, errorElement, 'Este campo es obligatorio') &&
+        validarLongitud(campo, errorElement, 1, 20, mensaje);
+}
+
 
 function validarCamposAlCambiarFoco()
 {
-    const camposMedico = [
-        ['nombresMedico', 'errorNombresMedico', 'El nombre debe tener entre 1 y 20 caracteres.'],
-        ['apellidosMedico', 'errorApellidosMedico', 'El apellido debe tener entre 1 y 20 caracteres.'],
-        ['especialidadMedico', 'errorEspecialidad', 'La especialidad debe tener entre 1 y 20 caracteres.']
-    ];
-    const camposPaciente = [
-        ['nombresPaciente', 'errorNombresPaciente', 'El nombre debe tener entre 1 y 20 caracteres.'],
-        ['apellidosPaciente', 'errorApellidosPaciente', 'El apellido debe tener entre 1 y 20 caracteres.']
-    ];
-
     [...camposMedico, ...camposPaciente].forEach(([campoId, errorId, mensaje]) => {
         const campo = document.getElementById(campoId);
-        const errorElement = document.getElementById(errorId);
-        campo.addEventListener('blur', () => {
-            validarCampoObligatorio(campo, errorElement, 'Este campo es obligatorio') &&
-                validarLongitud(campo, errorElement, 1, 20, mensaje);
-        });
-        campo.addEventListener('input', () => {
-            validarCampoObligatorio(campo, errorElement, 'Este campo es obligatorio') &&
-                validarLongitud(campo, errorElement, 1, 20, mensaje);
-        });
+        campo.addEventListener('blur', () => validarCampoDesdeId(campoId, errorId, mensaje));
     });
 
     const inputHorarioInicio = document.getElementById('horarioInicioMedico');
@@ -169,8 +166,29 @@ function validarCamposAlCambiarFoco()
 
     inputHorarioInicio.addEventListener('blur', validarHorarioAlCambiarFoco);
     inputHorarioFin.addEventListener('blur', validarHorarioAlCambiarFoco);
-    inputHorarioInicio.addEventListener('input', validarHorarioAlCambiarFoco);
-    inputHorarioFin.addEventListener('input', validarHorarioAlCambiarFoco);
+}
+
+
+function validarCamposAlEscribir()
+{
+    [...camposMedico, ...camposPaciente].forEach(([campoId, errorId, mensaje]) => {
+        const campo = document.getElementById(campoId);
+        campo.addEventListener('input', () => validarCampoDesdeId(campoId, errorId, mensaje));
+    });
+
+    const inputHorarioInicio = document.getElementById('horarioInicioMedico');
+    const inputHorarioFin = document.getElementById('horarioFinMedico');
+    const labelErrorHorarioInicio = document.getElementById('errorHorarioInicio');
+    const labelErrorHorarioFin = document.getElementById('errorHorarioFin');
+    const validarHorarioAlEscribir = () => validarHorario(
+        inputHorarioInicio,
+        inputHorarioFin,
+        labelErrorHorarioInicio,
+        labelErrorHorarioFin,
+        'La hora de fin debe ser posterior a la hora de inicio');
+
+    inputHorarioInicio.addEventListener('input', validarHorarioAlEscribir);
+    inputHorarioFin.addEventListener('input', validarHorarioAlEscribir);
 
     const selectMedico = document.getElementById('medicoSelect');
     const selectPaciente = document.getElementById('pacienteSelect');
@@ -185,5 +203,7 @@ function validarCamposAlCambiarFoco()
     });
 }
 
-document.addEventListener('DOMContentLoaded', validarCamposAlCambiarFoco);
-
+document.addEventListener('DOMContentLoaded', () => {
+    validarCamposAlCambiarFoco();
+    validarCamposAlEscribir();
+});

@@ -2,8 +2,6 @@ const formCitas = document.getElementById("formCitas");
 const tablaCitas = document.getElementById("tablaCitas");
 const btnAgregarCita = document.getElementById("btnAgregarCita");
 
-// habilita/deshabilita el botón según la validez del formulario
-// ("change" cubre los <select>, que no siempre disparan "input")
 formCitas.addEventListener("input", () => {
   btnAgregarCita.disabled = !formCitas.checkValidity();
 });
